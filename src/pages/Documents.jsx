@@ -21,8 +21,8 @@ export default function Documents() {
         try {
             const data = await documentService.getAll();
             setDocuments(data.items || []);
-        } catch {
-            toast.error(t('documents.upload_failed'));
+        } catch (error) {
+            toast.error(`${t('documents.upload_failed')}: ${error.message}`);
         } finally {
             setLoading(false);
         }
@@ -34,7 +34,7 @@ export default function Documents() {
             toast.success(t('documents.document_uploaded'));
             fetchDocuments();
         } catch (error) {
-            toast.error(t('documents.upload_failed'));
+            toast.error(`${t('documents.upload_failed')}: ${error.message}`);
             throw error;
         }
     };

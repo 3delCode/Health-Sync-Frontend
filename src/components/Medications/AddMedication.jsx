@@ -24,7 +24,7 @@ export default function AddMedication({ isOpen, onClose, onSave }) {
 
   const times = [
     { value: 'morning', label: t('medications.morning') },
-    { value: 'noon',    label: t('medications.afternoon') },
+    { value: 'afternoon',    label: t('medications.afternoon') },
     { value: 'evening', label: t('medications.evening') },
     { value: 'night',   label: t('medications.night') },
   ]

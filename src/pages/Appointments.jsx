@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Plus } from 'lucide-react';
-import AppointmentsList from '../components/appointments/AppointmentsList';
-import AddAppointment from '../components/appointments/AddAppointment';
+import AppointmentsList from '../components/Appointments/AppointmentsList';
+import AddAppointment from '../components/Appointments/AddAppointment';
 import appointmentService from '../services/appointmentService';
 import Button from '../components/common/Button';
 import toast from 'react-hot-toast';
@@ -19,8 +19,8 @@ export default function Appointments() {
         try {
             const data = await appointmentService.getAll();
             setAppointments(data.items || []);
-        } catch {
-            toast.error(t('appointments.add_failed'));
+        } catch (error) {
+            toast.error(`${t('appointments.add_failed')}: ${error.message}`);
         } finally {
             setLoading(false);
         }
@@ -32,7 +32,7 @@ export default function Appointments() {
             toast.success(t('appointments.appointment_added'));
             fetchAppointments();
         } catch (error) {
-            toast.error(t('appointments.add_failed'));
+            toast.error(`${t('appointments.add_failed')}: ${error.message}`);
             throw error;
         }
     };

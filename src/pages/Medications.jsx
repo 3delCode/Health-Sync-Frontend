@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Plus } from 'lucide-react';
-import MedicationsList from '../components/medications/MedicationsList';
-import AddMedication from '../components/medications/AddMedication';
-import AdherenceChart from '../components/medications/AdherenceChart';
+import MedicationsList from '../components/Medications/MedicationsList';
+import AddMedication from '../components/Medications/AddMedication';
+import AdherenceChart from '../components/Medications/AdherenceChart';
 import DrugInteractionChecker from '../components/Medications/DrugInteractionChecker';
 import medicationService from '../services/medicationService';
 import Button from '../components/common/Button';
@@ -22,7 +22,7 @@ export default function Medications() {
             const data = await medicationService.getAll();
             setMedications(data.items || []);
         } catch (error) {
-            toast.error(t('medications.add_failed'));
+            toast.error(`${t('medications.add_failed')}: ${error.message}`);
         } finally {
             setLoading(false);
         }
@@ -34,7 +34,7 @@ export default function Medications() {
             toast.success(t('medications.medication_added'));
             fetchMedications();
         } catch (error) {
-            toast.error(t('medications.add_failed'));
+            toast.error(`${t('medications.add_failed')}: ${error.message}`);
             throw error;
         }
     };
